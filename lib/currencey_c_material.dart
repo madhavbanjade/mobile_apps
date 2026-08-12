@@ -1,5 +1,6 @@
 
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CurrenceyCMaterialApp extends StatelessWidget {
@@ -63,7 +64,35 @@ Widget build(BuildContext context){
           ),
         ),
       
+      Container(
+        padding: EdgeInsets.all(10),
+        child: ElevatedButton(onPressed: (){
+          //debug, released, profile
+          if(!kDebugMode){
+            debugPrint('Button Clicked !');
+          }
+        },
+        style: const ButtonStyle(
+          elevation: WidgetStatePropertyAll(10),
+          backgroundColor: WidgetStatePropertyAll(Colors.black),
+          foregroundColor: WidgetStatePropertyAll(Colors.white),
+        
+        minimumSize: WidgetStatePropertyAll(
+          Size(double.infinity, 50),
+        )
+        ),
+        
+        child: 
+           Text("Convert")
+        ),
+      )
+
       ],
+
+      
+
+
+
     )
 
     )
