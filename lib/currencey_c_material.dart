@@ -34,6 +34,7 @@ Widget build(BuildContext context){
 
         Container(
           //you can add padding and margin and a lots of widgets from container.
+    
           padding: const EdgeInsets.all(10),
           child: TextField(
             style: TextStyle(
