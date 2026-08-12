@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget{
 @override
   Widget build(BuildContext context){
     return Text(
-      'Hello flutter world !',
-     textDirection: TextDirection.rtl, //important
+      'Hello flutter world welcome!',
+     textDirection: TextDirection.ltr, //important
     );
   }
 
