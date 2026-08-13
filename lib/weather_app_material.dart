@@ -30,9 +30,25 @@ print("Button Clicked"),
  body: Column(
   children: [
   //main card 
-  const Placeholder(
-    fallbackHeight: 250,
+SizedBox(
+  width: double.infinity,
+  child: Card(
+     elevation: 0,
+     child: Column(
+    
+      children: [
+        Text('300 F', 
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+  
+        ),)
+      ],
+     ),
+  
+  
   ),
+),
 
 const SizedBox(height: 20,),
 
