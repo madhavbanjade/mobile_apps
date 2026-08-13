@@ -1,6 +1,9 @@
 
 import 'package:currency_converter/currencey_c_material.dart';
+import 'package:currency_converter/currency_c_cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+
 //this is not how we work on flutter we use our class concept from dart and call them in our main function.
 // void main(){
 //   runApp(Text(
@@ -10,7 +13,7 @@ import 'package:flutter/material.dart';
 // }
 
 void main(){
-runApp(const MyApp());
+runApp(const MyCupertinoApp());
 }
 
 class MyApp extends StatelessWidget{
@@ -39,9 +42,26 @@ class MyApp extends StatelessWidget{
 
 
       // ----- now we build everything in pieces and collecting it here
-      home: CurrenceyCMaterialApp(),
+      home: CurrencyConverterMaterialPage(),
       
     );
+
+
+
+
+
   }
 
+}
+
+
+class MyCupertinoApp extends StatelessWidget {
+  const MyCupertinoApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const CupertinoApp(
+      home: CurrencyConverterCupertinoPage(),
+    );
+  }
 }
