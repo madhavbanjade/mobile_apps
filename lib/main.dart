@@ -1,6 +1,6 @@
-
 import 'package:currency_converter/currencey_c_material.dart';
 import 'package:currency_converter/currency_c_cupertino.dart';
+import 'package:currency_converter/weather_app_material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -12,16 +12,16 @@ import 'package:flutter/cupertino.dart';
 //   ));
 // }
 
-void main(){
-runApp(const MyCupertinoApp());
+void main() {
+  runApp(const WeatherApp());
 }
 
-class MyApp extends StatelessWidget{
+
+//The folowing code is for currency_converter
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-@override
-  Widget build(BuildContext context){
-
+  @override
+  Widget build(BuildContext context) {
     // return const Text(
     //   'Hello flutter world welcome!',
     //  textDirection: TextDirection.ltr, //important
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget{
     return const MaterialApp(
       // without scaffold --- problem-1
       // home: Text("Hello World !!!")
-      //with scaffold 
+      //with scaffold
       // home: Scaffold(
       //   //this is not aligning where i want and i can not use text-aign as well --- problem-2
       //   // body: Text("Hello Flutter World"),
@@ -40,28 +40,33 @@ class MyApp extends StatelessWidget{
       //   ),
       // ),
 
-
       // ----- now we build everything in pieces and collecting it here
       home: CurrencyConverterMaterialPage(),
-      
     );
-
-
-
-
-
   }
-
 }
-
 
 class MyCupertinoApp extends StatelessWidget {
   const MyCupertinoApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const CupertinoApp(
-      home: CurrencyConverterCupertinoPage(),
+    return const CupertinoApp(home: CurrencyConverterCupertinoPage());
+  }
+}
+
+
+//the following code is for weather_application
+
+class WeatherApp extends StatelessWidget {
+  const WeatherApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(useMaterial3: true),
+      home: const WeatherScreen(),
     );
   }
 }
