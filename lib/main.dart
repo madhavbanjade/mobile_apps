@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 // void main(){
 //   runApp(Text(
 //     'Hy it is my first flutter project.',
-//     textDirection: TextDirection.ltr,
+//     textDirection: TextDirection.ltr,com
 //   ));
 // }
 
