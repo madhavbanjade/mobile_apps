@@ -4,7 +4,7 @@ import 'package:currency_converter/weather_app_material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-//this is not how we work on flutter we use our class concept from dart and call them in our main function.
+//this is not how we work on flutter we use our class concept from dart and call them in our main function. never trust anyone 
 // void main(){
 //   runApp(Text(
 //     'Hy it is my first flutter project.',
