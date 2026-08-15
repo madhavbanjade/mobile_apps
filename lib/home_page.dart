@@ -1,3 +1,5 @@
+import 'package:currency_converter/global_variables.dart';
+import 'package:currency_converter/product_card.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,7 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<String> filters = const ['All', "Adidas", "Nike", "Bata"];
-   late String selectedFilter;
+  late String selectedFilter;
 
   @override
   void initState() {
@@ -62,12 +64,13 @@ class _HomePageState extends State<HomePage> {
                     child: GestureDetector(
                       onTap: () {
                         setState(() {
-                        selectedFilter = filter;
-                          
+                          selectedFilter = filter;
                         });
                       },
                       child: Chip(
-                        backgroundColor: selectedFilter == filter ? Theme.of(context).colorScheme.primary : Color.fromRGBO(245, 247, 249, 1),
+                        backgroundColor: selectedFilter == filter
+                            ? Theme.of(context).colorScheme.primary
+                            : Color.fromRGBO(245, 247, 249, 1),
                         side: const BorderSide(
                           color: Color.fromRGBO(245, 247, 249, 1),
                         ),
@@ -82,6 +85,24 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
+                  );
+                },
+              ),
+            ),
+
+            Expanded(
+              child: ListView.builder(
+                itemCount: products.length,
+              
+                itemBuilder: (context, index) {
+                  final product = products[index];
+                  return ProductCard(
+                    text: product['title'] as String,
+                    price: product['price'] as double,
+                    image: product['imageUrl'] as String,
+                    backgroundColor: index.isEven 
+                    ? const Color.fromRGBO(216, 240, 253, 1)
+                    : const Color.fromRGBO(245, 247, 249, 1)
                   );
                 },
               ),
