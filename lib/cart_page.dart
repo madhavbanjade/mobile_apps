@@ -1,5 +1,4 @@
 import 'package:currency_converter/cart_provider.dart';
-import 'package:currency_converter/global_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,18 +7,20 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(Provider.of<CartProvider>(context).cart);
+    final cart = context.watch<CartProvider>().cart;
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: const Text('Cart', style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold
-        ),)),
+        title: Center(
+          child: const Text(
+            'Cart',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
       ),
-   body:   ListView.builder(
-        itemCount: Cart.length,
+      body: ListView.builder(
+        itemCount: cart.length,
         itemBuilder: (context, index) {
-          final cartItem = Cart[index];
+          final cartItem = cart[index];
 
           return (ListTile(
             leading: CircleAvatar(
@@ -27,14 +28,60 @@ class CartPage extends StatelessWidget {
               radius: 30,
             ),
             trailing: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text(
+                        'Delete Product',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      content: Text(
+                        'Are you sure you want to remove this product form cart',
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            'No',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            context.read<CartProvider>().removeProduct(
+                              cartItem,
+                            );
+
+                            Navigator.of(context).pop();
+                          },
+
+                          child: Text(
+                            'Yes',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
               icon: Icon(Icons.delete, color: Colors.red),
             ),
             title: Text(
               cartItem['title'].toString(),
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            subtitle: Text('Size: ${cartItem['size']}'),
+            subtitle: Text('Size: ${cartItem['sizes']}'),
           ));
         },
       ),

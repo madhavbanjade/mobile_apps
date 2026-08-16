@@ -12,7 +12,7 @@ notifyListeners();
 }
 
 void removeProduct(Map<String, dynamic> product){
-cart.add(product);
+cart.remove(product);
 notifyListeners();
 
 }
