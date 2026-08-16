@@ -1,5 +1,5 @@
-import 'package:currency_converter/global_variables.dart';
-import 'package:currency_converter/product_card.dart';
+import 'package:currency_converter/cart_page.dart';
+import 'package:currency_converter/product_list.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,105 +10,36 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<String> filters = const ['All', "Adidas", "Nike", "Bata"];
-  late String selectedFilter;
 
-  @override
-  void initState() {
-    super.initState();
-    selectedFilter = filters[0];
-  }
 
+int currentPage = 0;
+
+List<Widget> pages = const [ProducrList(), CartPage()];
   @override
   Widget build(BuildContext context) {
-    final border = OutlineInputBorder(
-      borderSide: BorderSide(color: Color.fromRGBO(255, 255, 255, 1)),
-      borderRadius: BorderRadius.horizontal(left: Radius.circular(50)),
-    );
+
 
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    "Shoes\nCollection",
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                ),
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: "Search",
-                      prefixIcon: const Icon(Icons.search),
-                      border: border,
-                      enabledBorder: border,
-                      focusedBorder: border,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 120,
-              child: ListView.builder(
-                itemCount: filters.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  final filter = filters[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedFilter = filter;
-                        });
-                      },
-                      child: Chip(
-                        backgroundColor: selectedFilter == filter
-                            ? Theme.of(context).colorScheme.primary
-                            : Color.fromRGBO(245, 247, 249, 1),
-                        side: const BorderSide(
-                          color: Color.fromRGBO(245, 247, 249, 1),
-                        ),
-                        label: Text(filter),
-                        labelStyle: const TextStyle(fontSize: 16),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 15,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-
-            Expanded(
-              child: ListView.builder(
-                itemCount: products.length,
-              
-                itemBuilder: (context, index) {
-                  final product = products[index];
-                  return ProductCard(
-                    text: product['title'] as String,
-                    price: product['price'] as double,
-                    image: product['imageUrl'] as String,
-                    backgroundColor: index.isEven 
-                    ? const Color.fromRGBO(216, 240, 253, 1)
-                    : const Color.fromRGBO(245, 247, 249, 1)
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+      //you can use pages[currentpage] or ternery operator for do this things but bby doing this you can have access to switch between pages and get the scrolled part previously..
+      body: IndexedStack(
+        index: currentPage,
+        children: pages,
+      ),
+     
+      bottomNavigationBar: BottomNavigationBar(
+        iconSize: 35,
+        selectedFontSize: 0,
+        unselectedFontSize: 0,
+        onTap: (value) {
+          setState(() {
+            currentPage = value;
+          });
+        },
+        currentIndex: currentPage,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: ''),
+        ],
       ),
     );
   }

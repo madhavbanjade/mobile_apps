@@ -1,3 +1,4 @@
+import 'package:currency_converter/cart_provider.dart';
 import 'package:currency_converter/currencey_c_material.dart';
 import 'package:currency_converter/currency_c_cupertino.dart';
 import 'package:currency_converter/global_variables.dart';
@@ -6,6 +7,7 @@ import 'package:currency_converter/product_detail_page.dart';
 import 'package:currency_converter/weather_app_material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 //this is not how we work on flutter we use our class concept from dart and call them in our main function. never trust anyone 
 // void main(){
@@ -80,44 +82,46 @@ class ShopApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-
-        appBarTheme: AppBarTheme(
-          titleTextStyle: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
+    return ChangeNotifierProvider(
+      create: (context) => CartProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+      
+          appBarTheme: AppBarTheme(
+            titleTextStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+            ),
           ),
-        ),
-        fontFamily: "Lato",
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromRGBO(254, 206, 1, 1),
-        primary: const Color.fromRGBO(254, 206, 1, 1) ),
-        inputDecorationTheme: InputDecorationTheme(
-          hintStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
+          fontFamily: "Lato",
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromRGBO(254, 206, 1, 1),
+          primary: const Color.fromRGBO(254, 206, 1, 1) ),
+          inputDecorationTheme: InputDecorationTheme(
+            hintStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+            prefixIconColor: Color.fromRGBO(119, 119, 119, 1),
           ),
-          prefixIconColor: Color.fromRGBO(119, 119, 119, 1),
-        ),
-        textTheme: const TextTheme(
-          titleLarge: TextStyle(
-            fontWeight: FontWeight.bold, fontSize: 35
-          ),
-          titleMedium: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-          titleSmall: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
+          textTheme: const TextTheme(
+            titleLarge: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 35
+            ),
+            titleMedium: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+            titleSmall: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            )
+       
           )
-     
+        ),
+        home: HomePage(
         )
       ),
-      home: ProductDetailPage(
-        product: products[0],
-      )
     );
   }
 } 

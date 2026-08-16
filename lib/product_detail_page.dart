@@ -1,4 +1,6 @@
+import 'package:currency_converter/cart_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final Map<String, Object> product;
@@ -10,6 +12,12 @@ class ProductDetailPage extends StatefulWidget {
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
   int selectSize = 0;
+  void addToCart() {
+    Provider.of<CartProvider>(
+      context,
+      listen: false,
+    ).addProduct(widget.product);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +76,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               },
                               child: Chip(
                                 label: Text(size.toString()),
-                                backgroundColor: selectSize == size ? Theme.of(context).colorScheme.primary : null,
-                                ),
+                                backgroundColor: selectSize == size
+                                    ? Theme.of(context).colorScheme.primary
+                                    : null,
+                              ),
                             ),
                           );
                         },
@@ -77,7 +87,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ),
                     // code begin
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: addToCart,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.primary,
                         minimumSize: const Size(double.infinity, 50),
